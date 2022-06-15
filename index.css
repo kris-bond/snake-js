@@ -1,0 +1,13 @@
+.container{
+    position: relative;
+    width: 400px;
+    height: 400px;
+  }
+  #gc {
+    position: absolute;
+  }
+  #button {
+    position:absolute;
+    left:50%;
+    top:50%
+  }
