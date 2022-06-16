@@ -1,15 +1,18 @@
 function start() {
+	document.getElementById('button').style.visibility = 'hidden';
 	canv=document.getElementById("gc");
 	ctx=canv.getContext("2d");
 	document.addEventListener("keydown",keyPush);
 	setInterval(game,1000/15);
 }
+
 px=py=10;
 gs=tc=20;
 ax=ay=15;
 xv=yv=0;
 trail=[];
 tail = 5;
+
 function game() {
 	px+=xv;
 	py+=yv;
@@ -48,6 +51,7 @@ function game() {
 	ctx.fillStyle="red";
 	ctx.fillRect(ax*gs,ay*gs,gs-2,gs-2);
 }
+
 function keyPush(evt) {
 	switch(evt.keyCode) {
 		case 37:
