@@ -6,8 +6,11 @@ xv=yv=0; // velocity
 trail=[]; // array for player trail
 tail = 5; // length of snake tail
 var gameInterval; // game interval used to start/ stop
+score = 0;
 
 function start() {
+	score = 0; // reset score
+	document.querySelector('.score').textContent = score;
 	gamestarted = false;
 	document.getElementById('button').style.visibility = 'hidden';
 	canv=document.getElementById("gc");
@@ -26,6 +29,10 @@ function stop() {
 	trail=[]; // array for player trail
 	tail = 5; // length of snake tail
 	document.getElementById('button').style.visibility = 'visible';
+}
+
+function updateScore() {
+	document.querySelector('.score').textContent = score;
 }
 
 // game logic
@@ -81,6 +88,8 @@ function game() {
 	// if player eats apple
 	if(ax==px && ay==py) {
 		tail++;
+		score++;
+		document.querySelector('.score').textContent = score;
 		ax=Math.floor(Math.random()*tc);
 		ay=Math.floor(Math.random()*tc);
 	}
