@@ -1,10 +1,3 @@
-function start() {
-	document.getElementById('button').style.visibility = 'hidden';
-	canv=document.getElementById("gc");
-	ctx=canv.getContext("2d");
-	document.addEventListener("keydown",keyPush);
-	setInterval(game,1000/15); // calls game function 15 times per second
-}
 
 px=py=10; // position
 gs=tc=20; // grid size / tile count
@@ -12,6 +5,28 @@ ax=ay=15; // apple (goal) position
 xv=yv=0; // velocity
 trail=[]; // array for player trail
 tail = 5; // length of snake tail
+var gameInterval; // game interval used to start/ stop
+
+function start() {
+	gamestarted = false;
+	document.getElementById('button').style.visibility = 'hidden';
+	canv=document.getElementById("gc");
+	ctx=canv.getContext("2d");
+	document.addEventListener("keydown",keyPush);
+	gameInterval = setInterval(game,1000/15); // calls game function 15 times per second
+	
+}
+
+function stop() {
+	clearInterval(gameInterval); // stop calling game function
+	px=py=10; // position
+	gs=tc=20; // grid size / tile count
+	ax=ay=15; // apple (goal) position
+	xv=yv=0; // velocity
+	trail=[]; // array for player trail
+	tail = 5; // length of snake tail
+	document.getElementById('button').style.visibility = 'visible';
+}
 
 // game logic
 function game() {
@@ -47,8 +62,11 @@ function game() {
 		if(trail[i].x==px && trail[i].y==py) {
 			tail = 5;
 
-			break;
-
+			// check to see if user has started game
+			if(gamestarted){
+				stop();
+			}
+			
 		}
 	}
 
@@ -74,6 +92,7 @@ function game() {
 
 // controls
 function keyPush(evt) {
+	gamestarted = true;
 	switch(evt.keyCode) {
 		case 37:
 			xv=-1;yv=0;
