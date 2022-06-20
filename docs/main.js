@@ -13,6 +13,7 @@ function start() {
 	document.querySelector('.score').textContent = score;
 	gamestarted = false;
 	document.getElementById('button').style.visibility = 'hidden';
+	document.getElementById('button-instructions').style.visibility = 'hidden';
 	canv=document.getElementById("gc");
 	ctx=canv.getContext("2d");
 	document.addEventListener("keydown",keyPush);
@@ -29,6 +30,7 @@ function stop() {
 	trail=[]; // array for player trail
 	tail = 5; // length of snake tail
 	document.getElementById('button').style.visibility = 'visible';
+	document.getElementById('button-instructions').style.visibility = 'visible';
 }
 
 function updateScore() {
@@ -116,4 +118,13 @@ function keyPush(evt) {
 			xv=0;yv=1;
 			break;
 	}
+}
+
+// instructions
+function showInstructions() {
+	document.getElementById("instructions").style.display = "block";
+}
+
+function hideInstructions() {
+	document.getElementById("instructions").style.display = "none";
 }

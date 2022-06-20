@@ -2,12 +2,46 @@
     position: relative;
     width: 400px;
     height: 400px;
+    background-color: black;
   }
+
   #gc {
     position: absolute;
   }
+
   #button {
     position:absolute;
     left:50%;
     top:50%
+  }
+
+  #button-instructions {
+    position:absolute;
+    left:50%;
+    top:60%
+  }
+
+  #instructions{
+    display: none;
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  #instruction-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    font-size: 1em;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
   }

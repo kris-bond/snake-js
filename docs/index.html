@@ -4,8 +4,18 @@
 
 <div class="container">
     <canvas id="gc" width="400" height="400"></canvas>
+
     <input id="button" type="button" onclick="start()" value="Play">
+    <button id="button-instructions" onclick="showInstructions()">Instructions</button>
 </div>
 <div class="scoreboard"> Score:  <span class="score"> 0 </span> </div>
+
+<div id="instructions" onclick="hideInstructions()">
+    <div id="instruction-text">
+        <p>Use keyboard arrow keys to move snake</p>
+        <p>Collect as many apples as you can while avoiding your tail</p>
+        <p>Click to close instructions</p>
+    </div>
+</div>
 
 <script type="text/javascript" src="main.js"></script>
