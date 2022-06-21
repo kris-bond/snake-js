@@ -10,15 +10,29 @@
   }
 
   #button {
-    position:absolute;
-    left:50%;
-    top:50%
+    height: 50px; 
+    width: 200px; 
+    margin: -20px -100px; 
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    background-color: black;
+    color: lime;
+    font-size: large;
+    border: none;
   }
 
   #button-instructions {
-    position:absolute;
-    left:50%;
-    top:60%
+    height: 50px; 
+    width: 200px; 
+    margin: -20px -100px; 
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    background-color: black;
+    color: lime;
+    font-size: large;
+    border: none;
   }
 
   #instructions{
