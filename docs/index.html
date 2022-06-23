@@ -8,21 +8,24 @@
     <input id="button" type="button" onclick="start()" value="PLAY">
     <button id="button-instructions" onclick="showInstructions()">INSTRUCTIONS</button>
     <button id="button-scores" onclick="showScores()">SCORES</button>
+
+    <div id="instructions" onclick="hideInstructions()">
+        <div id="instruction-text">
+            <p>Use keyboard arrow keys to move snake</p>
+            <p>Collect as many apples as you can while avoiding your tail</p>
+            <p>Click to close instructions</p>
+        </div>
+    </div>
+    
+    <div id="scoreboard" onclick="hideScores()">
+        <div id="scoreboard-text">
+            <p>Scoreboard:</p>
+            <p>Click to close scoreboard</p>
+        </div>
+    </div>
 </div>
 <div class="scoreboard"> Score:  <span class="score"> 0 </span> </div>
 
-<div id="instructions" onclick="hideInstructions()">
-    <div id="instruction-text">
-        <p>Use keyboard arrow keys to move snake</p>
-        <p>Collect as many apples as you can while avoiding your tail</p>
-        <p>Click to close instructions</p>
-    </div>
-</div>
 
-<div id="scoreboard" onclick="hideScores()">
-    <div id="scoreboard-text">
-        <p>Scoreboard:</p>
-    </div>
-</div>
 
 <script type="text/javascript" src="main.js"></script>
