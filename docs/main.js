@@ -6,10 +6,12 @@ xv=yv=0; // velocity
 trail=[]; // array for player trail
 tail = 5; // length of snake tail
 var gameInterval; // game interval used to start/ stop
-score = 0;
+score = 0; // score tally
+direction = "none"; // captures direction of snake - used to prevent turning back on self
 
 function start() {
 	score = 0; // reset score
+	direction = "none"; // reset direction
 	document.querySelector('.score').textContent = score;
 	gamestarted = false;
 	document.getElementById('button').style.visibility = 'hidden';
@@ -108,17 +110,33 @@ function keyPush(evt) {
 	gamestarted = true;
 	switch(evt.keyCode) {
 		case 37:
-			xv=-1;yv=0;
-			break;
+			if(direction=="right"){break;} // prevents from turning back on itself
+			else{
+				xv=-1;yv=0;
+				direction = "left"
+				break;
+			}
 		case 38:
-			xv=0;yv=-1;
-			break;
+			if(direction=="down"){break;} // prevents from turning back on itself
+			else{
+				xv=0;yv=-1;
+				direction = "up"
+				break;
+			}
 		case 39:
-			xv=1;yv=0;
-			break;
+			if(direction=="left"){break;} // prevents from turning back on itself
+			else{
+				xv=1;yv=0;
+				direction = "right"
+				break;
+			}
 		case 40:
-			xv=0;yv=1;
-			break;
+			if(direction=="up"){break;} // prevents from turning back on itself
+			else{
+				xv=0;yv=1;
+				direction = "down"
+				break;
+			}
 	}
 }
 
