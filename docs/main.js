@@ -11,7 +11,6 @@ direction = "none"; // captures direction of snake - used to prevent turning bac
 
 function start() {
 	score = 0; // reset score
-	direction = "none"; // reset direction
 	document.querySelector('.score').textContent = score;
 	gamestarted = false;
 	document.getElementById('button').style.visibility = 'hidden';
@@ -32,6 +31,7 @@ function stop() {
 	xv=yv=0; // velocity
 	trail=[]; // array for player trail
 	tail = 5; // length of snake tail
+	direction = "none"; // reset direction
 	document.getElementById('button').style.visibility = 'visible';
 	document.getElementById('button-instructions').style.visibility = 'visible';
 	document.getElementById('button-scores').style.visibility = 'visible';
