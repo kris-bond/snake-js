@@ -1,99 +1,111 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .container{
-    position: relative;
+    position: fixed;
     width: 400px;
     height: 400px;
     background-color: black;
-  }
+}
 
-  #gc {
-    position: absolute;
-  }
+.scoreboard {
+  position: absolute;
+  top: 75%;
+}
 
-  #button {
-    height: 50px; 
-    width: 200px; 
-    margin: -20px -100px; 
-    position: absolute;
-    left: 50%;
-    top: 30%;
-    background-color: black;
-    color: lime;
-    font-size: large;
-    border: none;
-  }
+#gc {
+  position: absolute;
+}
 
-  #button-instructions {
-    height: 50px; 
-    width: 200px; 
-    margin: -20px -100px; 
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    background-color: black;
-    color: lime;
-    font-size: large;
-    border: none;
-  }
+#button {
+  height: 50px; 
+  width: 200px; 
+  margin: -20px -100px; 
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  background-color: black;
+  color: lime;
+  font-size: large;
+  border: none;
+}
 
-  #button-scores {
-    height: 50px; 
-    width: 200px; 
-    margin: -20px -100px; 
-    position: absolute;
-    left: 50%;
-    top: 70%;
-    background-color: black;
-    color: lime;
-    font-size: large;
-    border: none;
-  }
+#button-instructions {
+  height: 50px; 
+  width: 200px; 
+  margin: -20px -100px; 
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: black;
+  color: lime;
+  font-size: large;
+  border: none;
+}
 
-  #instructions{
-    display: none;
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,1);
-    z-index: 2;
-    cursor: pointer;
-  }
+#button-scores {
+  height: 50px; 
+  width: 200px; 
+  margin: -20px -100px; 
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  background-color: black;
+  color: lime;
+  font-size: large;
+  border: none;
+}
 
-  #instruction-text{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 50px;
-    font-size: 1em;
-    color: lime;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-  }
+#instructions{
+  display: none;
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,1);
+  z-index: 2;
+  cursor: pointer;
+}
 
-  #scoreboard{
-    display: none;
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,1);
-    z-index: 2;
-    cursor: pointer;
-  }
+#instruction-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  font-size: 1em;
+  color: lime;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
 
-  #scoreboard-text{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 50px;
-    font-size: 1em;
-    color: lime;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-  }
+#scoreboard{
+  display: none;
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,1);
+  z-index: 2;
+  cursor: pointer;
+}
+
+#scoreboard-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  font-size: 1em;
+  color: lime;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
