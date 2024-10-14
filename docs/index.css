@@ -5,11 +5,11 @@ body {
   flex-direction: column;
 }
 
-.container{
-    position: fixed;
-    width: 400px;
-    height: 400px;
-    background-color: black;
+.container {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background-color: black;
 }
 
 .scoreboard {
@@ -22,9 +22,9 @@ body {
 }
 
 #button {
-  height: 50px; 
-  width: 200px; 
-  margin: -20px -100px; 
+  height: 50px;
+  width: 200px;
+  margin: -20px -100px;
   position: absolute;
   left: 50%;
   top: 30%;
@@ -35,9 +35,9 @@ body {
 }
 
 #button-instructions {
-  height: 50px; 
-  width: 200px; 
-  margin: -20px -100px; 
+  height: 50px;
+  width: 200px;
+  margin: -20px -100px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -48,9 +48,9 @@ body {
 }
 
 #button-scores {
-  height: 50px; 
-  width: 200px; 
-  margin: -20px -100px; 
+  height: 50px;
+  width: 200px;
+  margin: -20px -100px;
   position: absolute;
   left: 50%;
   top: 70%;
@@ -60,7 +60,7 @@ body {
   border: none;
 }
 
-#instructions{
+#instructions {
   display: none;
   position: absolute;
   width: 400px;
@@ -69,23 +69,23 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,1);
+  background-color: rgba(0, 0, 0, 1);
   z-index: 2;
   cursor: pointer;
 }
 
-#instruction-text{
+#instruction-text {
   position: absolute;
   top: 50%;
   left: 50%;
   font-size: 50px;
   font-size: 1em;
   color: lime;
-  transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
 
-#scoreboard{
+#scoreboard {
   display: none;
   position: absolute;
   width: 400px;
@@ -94,18 +94,18 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,1);
+  background-color: rgba(0, 0, 0, 1);
   z-index: 2;
   cursor: pointer;
 }
 
-#scoreboard-text{
+#scoreboard-text {
   position: absolute;
   top: 50%;
   left: 50%;
   font-size: 50px;
   font-size: 1em;
   color: lime;
-  transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }

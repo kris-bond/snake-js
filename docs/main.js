@@ -1,179 +1,194 @@
-px = py = 10; // position
-gs = tc = 20; // grid size / tile count
-ax = ay = 15; // apple (goal) position
-xv = yv = 0; // velocity
-trail = []; // array for player trail
-tail = 5; // length of snake tail
-var gameInterval; // game interval used to start/ stop
-score = 0; // score tally
-direction = 'none'; // captures direction of snake - used to prevent turning back on self
-
-function start() {
-  score = 0; // reset score
-  document.querySelector('.score').textContent = score;
-  gamestarted = false;
-  document.getElementById('button').style.visibility = 'hidden';
-  document.getElementById('button-instructions').style.visibility = 'hidden';
-  document.getElementById('button-scores').style.visibility = 'hidden';
-  canv = document.getElementById('gc');
-  ctx = canv.getContext('2d');
-  document.addEventListener('keydown', keyPush);
-  gameInterval = setInterval(game, 1000 / 15); // calls game function 15 times per second
-}
-
-function stop() {
-  clearInterval(gameInterval); // stop calling game function
-  saveScore(score);
-  px = py = 10; // position
-  gs = tc = 20; // grid size / tile count
-  ax = ay = 15; // apple (goal) position
-  xv = yv = 0; // velocity
-  trail = []; // array for player trail
-  tail = 5; // length of snake tail
-  direction = 'none'; // reset direction
-  document.getElementById('button').style.visibility = 'visible';
-  document.getElementById('button-instructions').style.visibility = 'visible';
-  document.getElementById('button-scores').style.visibility = 'visible';
-}
-
-function saveScore(score) {
-  let scores = JSON.parse(localStorage.getItem('highScores')) || [];
-
-  // Add the new score and sort by highest first
-  scores.push(score);
-  scores.sort((a, b) => b - a);
-
-  // Keep only the top 5 scores
-  scores = scores.slice(0, 5);
-
-  // Save the updated scores back to localStorage
-  localStorage.setItem('highScores', JSON.stringify(scores));
-}
-
-function updateScore() {
-  document.querySelector('.score').textContent = score;
-}
-
-// game logic
-function game() {
-  // player velocity
-  px += xv;
-  py += yv;
-
-  // wrapping around board
-  if (px < 0) {
-    px = tc - 1;
-  }
-  if (px > tc - 1) {
-    px = 0;
-  }
-  if (py < 0) {
-    py = tc - 1;
-  }
-  if (py > tc - 1) {
-    py = 0;
+class SnakeGame {
+  constructor() {
+    this.px = this.py = 10;
+    this.gs = this.tc = 20;
+    this.ax = this.ay = 15;
+    this.xv = this.yv = 0;
+    this.trail = [];
+    this.tail = 5;
+    this.score = 0;
+    this.direction = 'none';
+    this.gameInterval = null;
+    this.canv = document.getElementById('gc');
+    this.ctx = this.canv.getContext('2d');
+    this.gamestarted = false;
   }
 
-  // background colour
-  ctx.fillStyle = 'black';
-  ctx.fillRect(0, 0, canv.width, canv.height);
+  // Initialise game
+  start() {
+    this.score = 0;
+    this.updateScore();
+    this.gamestarted = false;
+    this.hideUI();
 
-  // snake colour
-  ctx.fillStyle = 'lime';
-  for (var i = 0; i < trail.length; i++) {
-    ctx.fillRect(trail[i].x * gs, trail[i].y * gs, gs - 2, gs - 2);
+    document.addEventListener('keydown', this.keyPush.bind(this));
+    this.gameInterval = setInterval(this.gameLoop.bind(this), 1000 / 15);
+  }
 
-    // if player collides with tail
-    if (trail[i].x == px && trail[i].y == py) {
-      tail = 5;
+  stop() {
+    clearInterval(this.gameInterval); // Stop the game loop
+    this.saveScore(this.score);
+    this.resetGame();
+    this.showUI();
+  }
 
-      // check to see if user has started game
-      if (gamestarted) {
-        stop();
+  saveScore(score) {
+    let scores = JSON.parse(localStorage.getItem('highScores')) || [];
+
+    // Add the new score and sort by highest first
+    scores.push(score);
+    scores.sort((a, b) => b - a);
+
+    // Keep only top 5 scores
+    scores = scores.slice(0, 5);
+
+    // Save the updated scores back to localStorage
+    localStorage.setItem('highScores', JSON.stringify(scores));
+  }
+
+  resetGame() {
+    this.px = this.py = 10;
+    this.ax = this.ay = 15;
+    this.xv = this.yv = 0;
+    this.trail = [];
+    this.tail = 5;
+    this.direction = 'none';
+    this.updateScore();
+  }
+
+  updateScore() {
+    document.querySelector('.score').textContent = this.score;
+  }
+
+  gameLoop() {
+    this.updatePosition();
+    this.checkCollision();
+    this.drawGame();
+  }
+
+  updatePosition() {
+    this.px += this.xv;
+    this.py += this.yv;
+
+    // Wrapping around board logic
+    if (this.px < 0) this.px = this.tc - 1;
+    if (this.px > this.tc - 1) this.px = 0;
+    if (this.py < 0) this.py = this.tc - 1;
+    if (this.py > this.tc - 1) this.py = 0;
+  }
+
+  checkCollision() {
+    for (let i = 0; i < this.trail.length; i++) {
+      if (this.trail[i].x === this.px && this.trail[i].y === this.py) {
+        this.tail = 5;
+        if (this.gamestarted) {
+          this.stop();
+        }
       }
+    }
+
+    // Eating apple
+    if (this.ax === this.px && this.ay === this.py) {
+      this.tail++;
+      this.score++;
+      this.updateScore();
+      this.ax = Math.floor(Math.random() * this.tc);
+      this.ay = Math.floor(Math.random() * this.tc);
+    }
+
+    this.trail.push({ x: this.px, y: this.py });
+    while (this.trail.length > this.tail) {
+      this.trail.shift();
     }
   }
 
-  // add on to trail for movement
-  trail.push({ x: px, y: py });
+  drawGame() {
+    this.ctx.fillStyle = 'black';
+    this.ctx.fillRect(0, 0, this.canv.width, this.canv.height);
 
-  // reduce trail when penalised
-  while (trail.length > tail) {
-    trail.shift();
+    // Snake
+    this.ctx.fillStyle = 'lime';
+    for (let i = 0; i < this.trail.length; i++) {
+      this.ctx.fillRect(
+        this.trail[i].x * this.gs,
+        this.trail[i].y * this.gs,
+        this.gs - 2,
+        this.gs - 2
+      );
+    }
+
+    // Apple
+    this.ctx.fillStyle = 'red';
+    this.ctx.fillRect(
+      this.ax * this.gs,
+      this.ay * this.gs,
+      this.gs - 2,
+      this.gs - 2
+    );
   }
 
-  // if player eats apple
-  if (ax == px && ay == py) {
-    tail++;
-    score++;
-    document.querySelector('.score').textContent = score;
-    ax = Math.floor(Math.random() * tc);
-    ay = Math.floor(Math.random() * tc);
+  keyPush(evt) {
+    this.gamestarted = true;
+    switch (evt.keyCode) {
+      case 37:
+        if (this.direction !== 'right') {
+          this.xv = -1;
+          this.yv = 0;
+          this.direction = 'left';
+        }
+        break;
+      case 38:
+        if (this.direction !== 'down') {
+          this.xv = 0;
+          this.yv = -1;
+          this.direction = 'up';
+        }
+        break;
+      case 39:
+        if (this.direction !== 'left') {
+          this.xv = 1;
+          this.yv = 0;
+          this.direction = 'right';
+        }
+        break;
+      case 40:
+        if (this.direction !== 'up') {
+          this.xv = 0;
+          this.yv = 1;
+          this.direction = 'down';
+        }
+        break;
+    }
   }
 
-  // colour apple
-  ctx.fillStyle = 'red';
-  ctx.fillRect(ax * gs, ay * gs, gs - 2, gs - 2);
-}
+  // UI control functions
+  hideUI() {
+    document.getElementById('button').style.visibility = 'hidden';
+    document.getElementById('button-instructions').style.visibility = 'hidden';
+    document.getElementById('button-scores').style.visibility = 'hidden';
+  }
 
-// controls
-function keyPush(evt) {
-  gamestarted = true;
-  switch (evt.keyCode) {
-    case 37:
-      if (direction == 'right') {
-        break;
-      } // prevents from turning back on itself
-      else {
-        xv = -1;
-        yv = 0;
-        direction = 'left';
-        break;
-      }
-    case 38:
-      if (direction == 'down') {
-        break;
-      } // prevents from turning back on itself
-      else {
-        xv = 0;
-        yv = -1;
-        direction = 'up';
-        break;
-      }
-    case 39:
-      if (direction == 'left') {
-        break;
-      } // prevents from turning back on itself
-      else {
-        xv = 1;
-        yv = 0;
-        direction = 'right';
-        break;
-      }
-    case 40:
-      if (direction == 'up') {
-        break;
-      } // prevents from turning back on itself
-      else {
-        xv = 0;
-        yv = 1;
-        direction = 'down';
-        break;
-      }
+  showUI() {
+    document.getElementById('button').style.visibility = 'visible';
+    document.getElementById('button-instructions').style.visibility = 'visible';
+    document.getElementById('button-scores').style.visibility = 'visible';
   }
 }
 
-// instructions
-function showInstructions() {
-  document.getElementById('instructions').style.display = 'block';
-}
+let game = new SnakeGame();
 
-function hideInstructions() {
-  document.getElementById('instructions').style.display = 'none';
-}
+document.getElementById('button').addEventListener('click', function () {
+  game.start();
+});
 
-// scoreboard
-function showScores() {
+document
+  .getElementById('button-instructions')
+  .addEventListener('click', function () {
+    document.getElementById('instructions').style.display = 'block';
+  });
+
+document.getElementById('button-scores').addEventListener('click', function () {
+  document.getElementById('scoreboard').style.display = 'block';
   let scores = JSON.parse(localStorage.getItem('highScores')) || [];
   let scoreboardText = document.getElementById('scoreboard-text');
 
@@ -187,6 +202,10 @@ function showScores() {
 
   scoreboardText.innerHTML += '<p>Click to close scoreboard</p>';
   document.getElementById('scoreboard').style.display = 'block';
+});
+
+function hideInstructions() {
+  document.getElementById('instructions').style.display = 'none';
 }
 
 function hideScores() {

@@ -1,38 +1,37 @@
 <head>
-    <title>Snake JS</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico?">
+  <title>Snake JS</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico?" />
 </head>
 
 <body>
-<div class="container">
+  <div class="container">
     <canvas id="gc" width="400" height="400"></canvas>
 
-    <input id="button" type="button" onclick="start()" value="PLAY">
-    <button id="button-instructions" onclick="showInstructions()">INSTRUCTIONS</button>
-    <button id="button-scores" onclick="showScores()">SCORES</button>
+    <input id="button" type="button" value="PLAY" />
+    <button id="button-instructions">INSTRUCTIONS</button>
+    <button id="button-scores">SCORES</button>
 
     <div id="instructions" onclick="hideInstructions()">
-        <div id="instruction-text">
-            <p>Use keyboard arrow keys to move snake</p>
-            <p>Collect as many apples as you can while avoiding your tail</p>
-            <p>Click to close instructions</p>
-        </div>
+      <div id="instruction-text">
+        <p>Use keyboard arrow keys to move snake</p>
+        <p>Collect as many apples as you can while avoiding your tail</p>
+        <p>Click to close instructions</p>
+      </div>
     </div>
-    
-    <div id="scoreboard" onclick="hideScores()">
-        <div id="scoreboard-text">
-            <p>HIGH SCORES</p>
-            <p>1.</p>
-            <p>2.</p>
-            <p>3.</p>
-            <p>4.</p>
-            <p>5.</p>
-            <p>Click to close scoreboard</p>
-        </div>
-    </div>
-</div>
-<div class="scoreboard"> Score:  <span class="score"> 0 </span> </div>
-</body>
 
-<script type="text/javascript" src="main.js"></script>
+    <div id="scoreboard" onclick="hideScores()">
+      <div id="scoreboard-text">
+        <p>HIGH SCORES</p>
+        <p>1.</p>
+        <p>2.</p>
+        <p>3.</p>
+        <p>4.</p>
+        <p>5.</p>
+        <p>Click to close scoreboard</p>
+      </div>
+    </div>
+  </div>
+  <div class="scoreboard">Score: <span class="score"> 0 </span></div>
+</body>
+<script src="main.js"></script>
